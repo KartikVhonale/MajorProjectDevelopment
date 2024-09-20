@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TShark Controller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TShark Controller</h1>
+    <button id="startBtn">Start TShark</button>
+    <button id="stopBtn">Stop TShark</button>
+    <p id="statusMessage"></p>
+
+    <script>
+        const statusMessage = document.getElementById('statusMessage');
+
+        // Start TShark
+        document.getElementById('startBtn').addEventListener('click', function() {
+            console.log('Start button clicked');
+            fetch('http://localhost:3000/start-tshark')  // Update with your backend URL
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Start response received', data);
+                    statusMessage.textContent = data.message;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    statusMessage.textContent = 'Error: ' + error;
+                });
+        });
+
+        // Stop TShark
+        document.getElementById('stopBtn').addEventListener('click', function() {
+            console.log('Stop button clicked');
+            fetch('http://localhost:3000/stop-tshark')  // Update with your backend URL
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Stop response received', data);
+                    statusMessage.textContent = data.message;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    statusMessage.textContent = 'Error: ' + error;
+                });
+        });
+    </script>
+</body>
+</html>
+
